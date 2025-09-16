@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Session Enrollment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="navbar">
+      <h1>Session Enrollment</h1>
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="instructorschedule.html">Instructor Schedule</a>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2 id="session-title">Enrolled Students</h2>
+        <p id="session-info">Loading session details...</p>
+
+        <table id="student-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Student ID</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alice Johnson</td>
+              <td>20251001</td>
+              <td>johnsona5@vcu.edu</td>
+            </tr>
+            <tr>
+              <td>Brian Lee</td>
+              <td>20251002</td>
+              <td>leeb7@vcu.edu</td>
+            </tr>
+            <tr>
+              <td>Chloe Smith</td>
+              <td>20251003</td>
+              <td>smithc2@vcu.edu</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Extract session ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session');
+
+    const sessionTitle = document.getElementById('session-title');
+    const sessionInfo = document.getElementById('session-info');
+    const studentTable = document.getElementById('student-table');
+
+    if (sessionId) {
+      sessionTitle.textContent = `Enrolled Students for ${sessionId}`;
+      sessionInfo.textContent = `Showing enrollment list for session: ${sessionId}`;
+      studentTable.style.display = 'table';
+    } else {
+      sessionInfo.textContent = "No session ID provided. Please access this page via the Instructor Schedule screen.";
+    }
+  </script>
+</body>
+</html>
