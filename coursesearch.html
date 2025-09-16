@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Search</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #f5f7fa; color: #333; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { background: #3498db; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        h1 { font-size: 24px; margin-bottom: 5px; }
+        .search-box { background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #2ecc71; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f8f9fa; }
+        tr:hover { background: #f1f7fd; }
+        .status { padding: 3px 8px; border-radius: 10px; font-size: 12px; }
+        .open { background: #e6f7ee; color: #27ae60; }
+        .full { background: #fbeeee; color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Course Search</h1>
+            <p>Find courses by department, instructor, or course number</p>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" placeholder="Search by keywords...">
+            <select>
+                <option>All Departments</option>
+                <option>Computer Science</option>
+                <option>Mathematics</option>
+                <option>Physics</option>
+            </select>
+            <button>Search Courses</button>
+        </div>
+        
+        <table>
+            <tr><th>Course</th><th>Instructor</th><th>Schedule</th><th>Status</th><th>Action</th></tr>
+            <tr><td>Info400 - Programming</td><td>Professor Smith</td><td>Friday 1:00-2:00</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
+            <tr><td>Math 201 - Calculus II</td><td>Professor Johnson</td><td>Tuesday 8:00-9:30</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
+            <tr><td>English 200 - Composition</td><td>Professor Williams</td><td>Mon-Wed 7:00-9:00</td><td><span class="status full">Full</span></td><td><button>View</button></td></tr>
+        </table>
+    </div>
+
+    <script>
+        document.querySelector('button').addEventListener('click', () => {
+            alert('Search functionality would be implemented here!');
+        });
+    </script>
+</body>
+</html>
