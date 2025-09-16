@@ -112,3 +112,32 @@ button:hover {
   background-color: #ddffdd;
   border-left: 5px solid #4CAF50;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #004080;
+  color: white;
+}
+
+.button-link {
+  background-color: #004080;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.button-link:hover {
+  background-color: #003366;
+}
