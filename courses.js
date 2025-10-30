@@ -1,6 +1,6 @@
-// Mock course data for Sprint 1
+// courses.js — mock course list
 const courses = [
-  { code: "CS101", name: "Intro to Computer Science", dept: "CS", instructor: "Dr. Smith", credits: 3, seats: 30, active: true },
-  { code: "MATH201", name: "Calculus I", dept: "Math", instructor: "Dr. Jones", credits: 4, seats: 25, active: true },
-  { code: "ENG150", name: "Literature & Composition", dept: "ENG", instructor: "Prof. Allen", credits: 3, seats: 20, active: false }
+  { code: "INFO400", name: "Programming", dept: "Computer Science", instructor: "Professor Smith", schedule: "Fri 1:00-2:00", seats: 10 },
+  { code: "MATH201", name: "Calculus II", dept: "Mathematics", instructor: "Professor Johnson", schedule: "Tue 8:00-9:30", seats: 5 },
+  { code: "ENG200", name: "Composition", dept: "English", instructor: "Professor Williams", schedule: "Mon-Wed 7:00-9:00", seats: 0 } // full
 ];
