@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Course Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #e74c3c;
+            --light: #f5f5f5;
+            --dark: #2c3e50;
+            --text: #333333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .student-info {
+            text-align: right;
+        }
+        
+        .student-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .student-id {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .enrollment-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .courses-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .courses-table th, .courses-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .courses-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .courses-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-danger {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .available-courses {
+            margin-top: 20px;
+        }
+        
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #fafafa;
+        }
+        
+        .course-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .course-meta {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .enrollment-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-open {
+            background: #e6f7ee;
+            color: var(--secondary-dark);
+        }
+        
+        .status-full {
+            background: #fbeeee;
+            color: var(--accent);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #e6f7ee;
+            color: var(--secondary-dark);
+            border: 1px solid #a3e9c2;
+        }
+        
+        .alert-error {
+            background: #fbeeee;
+            color: var(--accent);
+            border: 1px solid #f5b7b1;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .enrollment-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">UniCourse Student Portal</div>
+            <div class="student-info">
+                <div class="student-name">John Doe</div>
+                <div class="student-id">Student ID: S123456</div>
+            </div>
+        </header>
+        
+        <div class="alert alert-success" id="successAlert">
+            <strong>Success!</strong> <span id="successMessage"></span>
+        </div>
+        
+        <div class="alert alert-error" id="errorAlert">
+            <strong>Error!</strong> <span id="errorMessage"></span>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <h2>My Current Schedule</h2>
+                <div class="enrollment-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalCredits">0</div>
+                        <div class="stat-label">Total Credits</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="enrolledCourses">0</div>
+                        <div class="stat-label">Courses Enrolled</div>
+                    </div>
+                </div>
+                
+                <table class="courses-table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Schedule</th>
+                            <th>Credits</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrolledCoursesList">
+                        <!-- Enrolled courses will be populated here -->
+                    </tbody>
+                </table>
+                
+                <div class="loading" id="enrolledLoading">
+                    Loading your enrolled courses...
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Available Courses</h2>
+                <div class="available-courses" id="availableCourses">
+                    <!-- Available courses will be populated here -->
+                </div>
+                <div class="loading" id="availableLoading">
+                    Loading available courses...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="registration.js"></script>
+    <script>
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            RegistrationSystem.initDashboard();
+        });
+    </script>
+</body>
+</html>
