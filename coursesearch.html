@@ -20,9 +20,12 @@
         .status { padding: 3px 8px; border-radius: 10px; font-size: 12px; }
         .open { background: #e6f7ee; color: #27ae60; }
         .full { background: #fbeeee; color: #e74c3c; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+        .navbar a { margin-left: 15px; text-decoration:none; color:#3498db; font-weight:600; }
     </style>
 </head>
 <body>
+
 <div class="navbar">
   <h2>Course Registration</h2>
   <div>
@@ -34,36 +37,72 @@
   </div>
 </div>
 
-    <div class="container">
-        <header>
-            <h1>Course Search</h1>
-            <p>Find courses by department, instructor, or course number</p>
-        </header>
-        
-        <div class="search-box">
-            <input type="text" placeholder="Search by keywords...">
-            <select>
-                <option>All Departments</option>
-                <option>Computer Science</option>
-                <option>Mathematics</option>
-                <option>Physics</option>
-            </select>
-            <button>Search Courses</button>
-        </div>
-        
-        <table>
-            <tr><th>Course</th><th>Instructor</th><th>Schedule</th><th>Status</th><th>Action</th></tr>
-            <tr><td>Info400 - Programming</td><td>Professor Smith</td><td>Friday 1:00-2:00</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
-            <tr><td>Math 201 - Calculus II</td><td>Professor Johnson</td><td>Tuesday 8:00-9:30</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
-            <tr><td>English 200 - Composition</td><td>Professor Williams</td><td>Mon-Wed 7:00-9:00</td><td><span class="status full">Full</span></td><td><button>View</button></td></tr>
-        </table>
+<div class="container">
+    <header>
+        <h1>Course Search</h1>
+        <p>Find courses by department, instructor, or course number</p>
+    </header>
+    
+    <div class="search-box">
+        <input id="searchInput" type="text" placeholder="Search by keywords...">
+        <select id="deptSelect">
+            <option>All Departments</option>
+            <option>Computer Science</option>
+            <option>Mathematics</option>
+            <option>English</option>
+        </select>
+        <button id="searchBtn">Search Courses</button>
     </div>
+    
+    <table id="resultsTable">
+        <tr><th>Course</th><th>Instructor</th><th>Schedule</th><th>Status</th><th>Action</th></tr>
+        <tr><td>Info400 - Programming</td><td>Professor Smith</td><td>Friday 1:00-2:00</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
+        <tr><td>Math 201 - Calculus II</td><td>Professor Johnson</td><td>Tuesday 8:00-9:30</td><td><span class="status open">Open</span></td><td><button>View</button></td></tr>
+        <tr><td>English 200 - Composition</td><td>Professor Williams</td><td>Mon-Wed 7:00-9:00</td><td><span class="status full">Full</span></td><td><button>View</button></td></tr>
+    </table>
+</div>
 
-    <script>
-        document.querySelector('button').addEventListener('click', () => {
-            alert('Search functionality would be implemented here!');
-        });
-    </script>
+<script src="courses.js"></script>
+<script>
+document.getElementById("searchBtn").addEventListener("click", () => {
+    const keyword = document.getElementById("searchInput").value.toLowerCase().trim();
+    const dept = document.getElementById("deptSelect").value;
+
+    const rows = courses.filter(c =>
+        (dept === "All Departments" || c.dept === dept) &&
+        (c.code.toLowerCase().includes(keyword) || 
+         c.name.toLowerCase().includes(keyword) || 
+         c.instructor.toLowerCase().includes(keyword))
+    );
+
+    const table = document.getElementById("resultsTable");
+    
+    table.innerHTML = `
+        <tr><th>Course</th><th>Instructor</th><th>Schedule</th><th>Status</th><th>Action</th></tr>
+    `;
+
+    if (rows.length === 0) {
+        table.innerHTML += `
+        <tr><td colspan="5" style="text-align:center; padding:12px;">No matching courses found</td></tr>`;
+        return;
+    }
+
+    rows.forEach(c => {
+        const status = c.seats > 0
+            ? `<span class="status open">Open</span>`
+            : `<span class="status full">Full</span>`;
+
+        table.innerHTML += `
+        <tr>
+            <td>${c.code} - ${c.name}</td>
+            <td>${c.instructor}</td>
+            <td>${c.schedule}</td>
+            <td>${status}</td>
+            <td><button>View</button></td>
+        </tr>`;
+    });
+});
+</script>
+
 </body>
-
 </html>
